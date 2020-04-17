@@ -1,6 +1,7 @@
 package com.abe.controllers;
 
 import com.abe.req.KeyGenReq;
+import com.abe.req.RevokeAttrReq;
 import com.abe.res.UserData;
 import com.abe.services.AAService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,22 @@ public class AAController {
     public UserData keyGen(@RequestBody KeyGenReq req) throws UnsupportedEncodingException {
         return aaService.keyGen(req.getUserData(),req.getAttributes());
 
+    }
+
+    @RequestMapping("/revokeAttributes")
+    public Boolean revokeAttributes(@RequestBody RevokeAttrReq req) throws UnsupportedEncodingException {
+
+        return aaService.revokeAttributes(req);
+    }
+
+    @RequestMapping("/isLatest")
+    public Boolean isLatest(String userId){
+        return aaService.isLatestVersion(userId);
+    }
+
+    @RequestMapping("/skUpdate")
+    public UserData skUpdate(@RequestBody UserData userData) throws UnsupportedEncodingException {
+        return aaService.skUpdate(userData);
     }
 
 

@@ -28,7 +28,7 @@ public class CAService {
     private String cmdRegister;
 
     @Autowired
-    private pythonService pyService;
+    private PythonService pyService;
 
     @Autowired
     private PyConfig config;
@@ -50,6 +50,7 @@ public class CAService {
         UserData res=new UserData();
         res.setPrivateData(userKeys);
         res.setPublicData(publicData);
+        res.setGPP(this.GPP);
         return res;
     }
 
