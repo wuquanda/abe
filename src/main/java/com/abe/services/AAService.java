@@ -116,6 +116,9 @@ public class AAService {
 
     public UserData skUpdate(UserData userData) throws UnsupportedEncodingException {
         String userId=userData.getPrivateData().getId();
+        if(!this.UKsVersion.containsKey(userId)){
+            return null;
+        }
         String b64UserKeys=Object2Base64Str(userData.getPrivateData());
         String b64UKsVersion=Object2Base64Str(UKsVersion.get(userId));
         String cmd=pyConfig.addParam(pyConfig.getCmdSKUpdate(),b64UserKeys, b64UKsVersion);
@@ -160,6 +163,9 @@ public class AAService {
                     Set<String> set=entry.getValue();
                     for(String attr:set){
                         if(revokedAttrs.contains(attr)){
+                           //Map<String,String> map=res.get(attr);
+                           // map.put(userId,this.publicDataMap.get(userId));
+                           // res.put(attr,map);
                             res.get(attr).put(userId,this.publicDataMap.get(userId));
                         }
                     }
